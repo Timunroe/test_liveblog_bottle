@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/Users/timmunroe/.local/share/virtualenvs/test_liveblog_bottle-7OrrWcJl/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true
-}
