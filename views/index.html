@@ -1,9 +1,7 @@
-% rebase('base.html')
+% rebase('base.html', title='index')
 
 <nav class="panel">
-    <p class="panel-heading">
-        PAGES
-    </p>
+    <p class="panel-heading">PAGES | <a href="#"><span class="button is-small has-background-dark has-text-white"><b>NEW +</b></span></a></p>
     % for item in data:
         <a class="panel-block" href="page/{{item[1]}}">
         <span class="panel-icon">
