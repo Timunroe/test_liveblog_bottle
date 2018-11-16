@@ -1,7 +1,7 @@
 % rebase('base.html', title='index')
 
 <nav class="panel">
-    <p class="panel-heading">PAGES | <a href="#"><span class="button is-small has-background-dark has-text-white"><b>NEW +</b></span></a></p>
+    <p class="panel-heading">PAGES | <span class="is-size-6">select below or</span> <a href="/page/new"><span class="button is-small has-background-dark has-text-white"><b>NEW page</b></span></a></p>
     % for item in data:
         <a class="panel-block" href="page/{{item[1]}}">
         <span class="panel-icon">
@@ -11,4 +11,3 @@
         </a>
     % end
 </nav>
-<p>Hello. qbqbq qbqbq bqbqb qbqbqb bqbqb bqbqb qbqbqb qbqbqb qbqbqb qbqbqbq bqbqbq bqbqbqb qbqbqb qbqbqbq bqbqb</p>
