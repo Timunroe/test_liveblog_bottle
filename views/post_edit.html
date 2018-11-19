@@ -1,20 +1,27 @@
-% rebase('base.html', title='edit')
+% rebase('base.html', title='post_edit')
 
+% if data['post'] is not None:
+%   post_id, headline, content = data['post']['post_id'], data['post']['headline'], data['post']['content']
+%   status, author = data['post']['status'], data['post']['author']
 <h1 class="is-size-3 has-text-grey-lighter">Edit post</h1>
-<form id="myForm" action="/save/{{ref_page}}/{{data['post_id']}}" method="post">
+% else:
+%    post_id, headline, content, status, author = 'new', '', '', '', ''
+    <h1 class="is-size-3 has-text-grey-lighter">New post</h1>
+% end
+<form id="myForm" action="/save/{{data['page_id']}}/{{post_id}}" method="post">
     <div class="field">
         <label class="label">Subhead (optional)</label>
         <div class="control">
-            <input class="input" name="subhead" type="text" value="{{data['headline']}}" tabindex="1">
+            <input class="input" name="subhead" type="text" value="{{headline}}" tabindex="1">
         </div>
-        <p><small>Original content: {{data['headline']}}</small></p>
+        <p><small>Original content: {{headline}}</small></p>
      </div>
     <!-- Create the editor container -->
     <div class="field">
         <label class="label">Content</label>
         <div class="control">
             <textarea name="content" id="editor" rows="4" cols="50">
-                {{!data['content']}}
+                {{!content}}
             </textarea>
         </div>
     </div>      
@@ -26,7 +33,7 @@
                 <div class="select">
                     <select name="status">
                     % for item in ['draft', 'live']:
-                        % if item == data['status']:
+                        % if item == status:
                             <option value="{{item}}" selected>{{item}}</option>
                         % else:
                             <option value="{{item}}" >{{item}}</option>
@@ -42,7 +49,7 @@
                 <div class="select">
                     <select name="author">
                         % for author in authors:
-                            % if author['name'] == data['author']:
+                            % if author['name'] == author:
                                 <option value="{{author['name']}}" selected>{{author['name']}}</option>
                             % else:
                                 <option value="{{author['name']}}" >{{author['name']}}</option>
@@ -62,18 +69,28 @@
         </div>
         <div>
             <div class="control">
-                <input type="button" onclick="location.href='/page/{{ref_page}}';" class="button is-link" form="myForm" value="Cancel">
+                <input type="button" onclick="location.href='/page/{{data['page_id']}}';" class="button is-link" form="myForm" value="Cancel">
             </div>
         </div>
     </div>
 </form>
 
+% end
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector: '#editor',
         height : 150,
         statusbar: false,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
         content_style: ".mce-content-body {font-size:14px;font-family:Verdana,Arial,Helvetica,sans-serif;}",
-    });
+        content_css: [
+            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i']
+        });
 </script>

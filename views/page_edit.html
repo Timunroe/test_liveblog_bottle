@@ -1,0 +1,47 @@
+% rebase('base.html', title='page_edit')
+
+% if data is not None:
+%   page_id = data['page_id']
+%   title = data['title']
+%   asset = data['DNN_asset']
+%   script_name = data['script_name']
+    <h1 class="is-size-3 has-text-grey-lighter">Edit page</h1>
+% else:
+%   page_id, title, asset, script_name = 'new', '', '', ''
+    <h1 class="is-size-3 has-text-grey-lighter">New page</h1>
+
+<form id="myForm" action="/save/page/{{page_id }}" method="post">
+    <div class="field">
+        <label class="label">Subhead (optional)</label>
+        <div class="control">
+            <input class="input" name="title" type="text" value="{{title}}" tabindex="1">
+        </div>
+     </div>
+    <div class="field">
+        <label class="label">DNN asset</label>
+        <div class="control">
+            <input class="input" name="asset" type="text" value="{{asset}}" tabindex="2">
+        </div>
+     </div>
+     <div class="field">
+        <label class="label">Script name (xx-xx.js)</label>
+        <div class="control">
+            <input class="input" name="script_name" type="text" value="{{script_name}}" tabindex="3">
+        </div>
+     </div>    
+    <div class="field is-grouped">
+        <div style="margin-right: 12px;">
+            <div class="control">
+                <button class="button is-link" form="myForm" value="save">Save</button>
+            </div>
+        </div>
+        <div>
+            <div class="control">
+                <input type="button" onclick="location.href='/';" class="button is-link" form="myForm" value="Cancel">
+            </div>
+        </div>
+    </div>
+</form>
+
+
+% end
