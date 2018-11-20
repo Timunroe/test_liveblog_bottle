@@ -1,7 +1,10 @@
-% rebase('base.html', title='page')
+% rebase('base.html', title='page', page_id=data['page_id'])
 
 <nav class="panel">
-    <p class="panel-heading">POSTS for <b>{{data['title']}}</b> | <a href="/page/{{data['page_id']}}/post/new"><span class="button is-small has-background-dark has-text-white"><b>NEW Article</b></span></a></p>
+    <p class="panel-heading">POSTS for <b>{{data['title']}}</b>
+     | <a href="/edit/page/{{data['page_id']}}/post/new">
+    <span class="button is-small has-background-dark has-text-white">
+    <b>NEW Article</b></span></a></p>
 </nav>
 
 
@@ -32,7 +35,7 @@
         </div>
     </div>
     <footer class="card-footer">
-        <a href="/page/{{data['page_id']}}/post/{{item['post_id']}}" class="card-footer-item is-primary">Edit</a>
+        <a href="/edit/page/{{data['page_id']}}/post/{{item['post_id']}}" class="card-footer-item is-primary">Edit</a>
         <a href="#" class="card-footer-item is-primary">Pin</a>
         <a href="#" class="card-footer-item is-danger">Delete</a>
     </footer>
