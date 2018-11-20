@@ -19,7 +19,7 @@ def index():
 def posts(page_id):
     # if id is 'new', then create page
     if page_id == 'new':
-
+        return None
     # else get list of posts for this page
     else:
         return template('page.html', data=db.get_posts(page_id))
