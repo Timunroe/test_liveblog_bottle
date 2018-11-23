@@ -3,10 +3,10 @@
 % if data['post'] is not None:
 %   post_id, headline, content = data['post']['post_id'], data['post']['headline'], data['post']['content']
 %   status, author = data['post']['status'], data['post']['author']
-<h1 class="is-size-3 has-text-grey-lighter">Edit post</h1>
+<h1 class="text-muted">Edit post</h1>
 % else:
 %    post_id, headline, content, status, author = 'new', '', '', '', ''
-    <h1 class="is-size-3 has-text-grey-lighter">New post</h1>
+    <h1 class="text-muted">New post</h1>
 % end
 <form id="myForm" action="/save/{{data['page_id']}}/{{post_id}}" method="post">
     <div class="field">

@@ -19,7 +19,7 @@ def index():
 def posts(page_id):
     # if id is 'new', then create page
     if page_id == 'new':
-        return None
+        return template('page_edit.html', data=None)
     # else get list of posts for this page
     else:
         return template('page.html', data=db.get_posts(page_id))
@@ -34,6 +34,7 @@ def edit(page_id, post_id=None):
     else:
         # dealing with editing or creating a new post belonging to a page
         return template('post_edit.html', data=db.get_posts(page_id, post_id), authors=db.get_authors())
+
 
 @app.route('/save/page/<page_id>', method='POST')
 @app.route('/save/page/<page_id>/post/<post_id>', method='POST')

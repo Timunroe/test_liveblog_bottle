@@ -3,10 +3,10 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Title</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th style="width: 72%" scope="col">Title | <a class="badge badge-secondary" href="/page/new">+ New Page</a></th>
+        <th style="width: 10%" scope="col"></th>
+        <th style="width: 10%" scope="col"></th>
+        <th style="width: 8%" scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -14,21 +14,9 @@
         <tr>
             <td>{{item['title']}}</td>
             <td><a class="btn btn-primary btn-sm" href="/page/{{item['page_id']}}">View Posts</a></td>
-            <td><a class="btn btn-warning btn-sm" href="/page/{{item['page_id']}}/preview">Preview</a></td>
+            <td><a class="btn btn-success btn-sm" href="/page/{{item['page_id']}}/preview">Preview</a></td>
             <td><a class="btn btn-warning btn-sm" href="/edit/page/{{item['page_id']}}">Edit</a></td>
         </tr>
         % end
     </tbody>
   </table>
-
-
-  <div class="card">
-        <div class="card-header">
-          PAGES | select below or <a class="btn btn-primary btn-sm" href="/page/new">New Page</a>
-        </div>
-        <ul class="list-group list-group-flush">
-            % for item in data:
-            <li class="list-group-item list-group-item-action">{{item['title']}}</li>
-            % end
-        </ul>
-      </div>
