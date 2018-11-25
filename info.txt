@@ -1,0 +1,22 @@
+db operations
+
+PAGE:
+
+
+POST:
+subhead (optional)
+contents: required
+author: required
+status: (live, draft): default live
+rank (1,2): default 0
+created time: auto set on first save
+modified time: auto set on every update
+
+
+PAGES: show list of pages
+    > list pages in order of most recent modifed time
+    > show page title
+
+PAGE: show list of page posts
+    > list posts in order of most recent modified time
+    > author, author image, post modifed time, post contents, rank value

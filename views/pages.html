@@ -1,22 +1,14 @@
 % rebase('base.html', title='index')
-
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th style="width: 72%" scope="col">Title | <a class="badge badge-secondary" href="/page/new">+ New Page</a></th>
-        <th style="width: 10%" scope="col"></th>
-        <th style="width: 10%" scope="col"></th>
-        <th style="width: 8%" scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-        % for item in data:
-        <tr>
-            <td>{{item['title']}}</td>
-            <td><a class="btn btn-primary btn-sm" href="/page/{{item['page_id']}}">View Posts</a></td>
-            <td><a class="btn btn-success btn-sm" href="/page/{{item['page_id']}}/preview">Preview</a></td>
-            <td><a class="btn btn-warning btn-sm" href="/edit/page/{{item['page_id']}}">Edit</a></td>
-        </tr>
-        % end
-    </tbody>
-  </table>
+<h2 class="mb-4">
+    Pages  <a class="btn btn-warning" href="/page/new">Add new</a>
+</h2>
+<hr>
+% for item in data:
+<p class="h5 mb-3"><small class="text-muted">Title:</small> {{item['title']}}</p>
+<div class="btn-group mb-2" role="group" aria-label="Basic example">
+    <a class="btn btn-outline-dark btn-sm" href="/page/{{item['page_id']}}">Posts</a>
+    <a class="btn btn-outline-dark btn-sm" href="/page/{{item['page_id']}}/preview">Preview</a>
+    <a class="btn btn-dark btn-sm" href="/edit/page/{{item['page_id']}}">Edit</a>
+</div>
+<hr>
+% end
