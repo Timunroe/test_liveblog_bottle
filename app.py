@@ -1,6 +1,9 @@
 from bottle import Bottle, run, template, request, static_file
 import db
 
+HOST = '0.0.0.0'
+PORT = 5002
+
 app = Bottle()
 
 
@@ -51,4 +54,4 @@ def save(page_id, post_id=None):
         print("Title: ", title)
 
 
-run(app, host='localhost', port=8080, debug=True, reloader=True)
+run(app, host=HOST, port=PORT, debug=True, reloader=True)
