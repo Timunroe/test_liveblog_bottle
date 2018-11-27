@@ -29,12 +29,8 @@
         <div class="content">
            {{!item['content']}}
         </div>
+        <a class="btn btn-primary" href="/edit/page/{{data['page_id']}}/post/{{item['post_id']}}" role="button">Link</a>
     </div>
-    <footer class="card-footer">
-        <a href="/edit/page/{{data['page_id']}}/post/{{item['post_id']}}" class="card-footer-item is-primary">Edit</a>
-        <a href="#" class="card-footer-item is-primary">Pin</a>
-        <a href="#" class="card-footer-item is-danger">Delete</a>
-    </footer>
 </div>
 <div style="height: 20px;"></div>
 % end
