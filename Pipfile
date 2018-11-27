@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 "flake8" = "*"
 smartypants = "*"
+"bottle-flash2" = "*"
 
 [dev-packages]
 

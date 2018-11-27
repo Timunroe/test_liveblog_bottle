@@ -1,12 +1,9 @@
 % rebase('base.html', title='page', page_id=data['page_id'])
 
-<nav class="panel">
-    <p class="panel-heading">POSTS for <b>{{data['title']}}</b>
-     | <a href="/edit/page/{{data['page_id']}}/post/new">
-    <span class="button is-small has-background-dark has-text-white">
-    <b>NEW Article</b></span></a></p>
-</nav>
-
+<h2 class="mb-4">
+    Posts  <a class="btn btn-warning" href="/edit/page/{{data['page_id']}}/post/new">Add new</a>
+</h2>
+<p class="panel-heading">Page: <b>{{data['title']}}</b>
 
 % for item in data['posts']:
 <div class="card">
