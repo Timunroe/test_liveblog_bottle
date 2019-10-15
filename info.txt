@@ -15,8 +15,13 @@ modified time: auto set on every update
 
 PAGES: show list of pages
     > list pages in order of most recent modifed time
-    > show page title
+    > show page title, action to edit, preview or see posts
 
 PAGE: show list of page posts
     > list posts in order of most recent modified time
-    > author, author image, post modifed time, post contents, rank value
+    > show author, author image, post modifed time, post contents, rank value
+    > action to edit
+
+EDIT PAGE: 
+    > show subhead, dnn asset, script name
+    > action to save changes, cancel leads back to page with ID

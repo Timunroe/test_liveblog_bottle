@@ -8,7 +8,7 @@
 %    post_id, headline, content, status, author = 'new', '', '', '', ''
     <h3 class="text-muted">New post</h3>
 % end
-<form id="myForm" action="/save/{{data['page_id']}}/{{post_id}}" method="post">
+<form id="myForm" action="/save/page/{{data['page_id']}}/post/{{post_id}}" method="post">
     <div class="form-group">
         <label class="label"><span><b>Subhead</b></span> (optional)</label>
             <input class="form-control" name="subhead" type="text" value="{{headline}}" tabindex="1">
