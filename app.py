@@ -1,6 +1,9 @@
 from bottle import Bottle, run, template, request, static_file
 from tinydb import TinyDB, Query
+import micawber
 import db
+
+providers = micawber.bootstrap_basic()
 
 HOST = '0.0.0.0'
 PORT = 5002
@@ -17,6 +20,24 @@ parse and add the HTML to certain divs.
 +++
 NEED TABLE FOR EACH 'blog/page'.
 '''
+
+
+def munge_text(data):
+    # fixes for text imported from form
+    # Need to wrap youtube link with responsive div
+    # before calling micawber
+    print("Raw data: ", data)
+    temp = ''
+    for line in data.splitlines():
+        if 'youtube' in line:
+            temp += f'''<div class="embed-container">{line}</div>'''
+        else:
+            temp += line
+    '''
+    <div class='embed-container'><iframe src='https://www.youtube.com/embed/QILiHiTD3uc' frameborder='0' allowfullscreen></iframe></div>
+    '''
+    return providers.parse_html(temp)
+
 
 non_url_safe = ['"', '#', '$', '%', '&', '+',
                 ',', '/', ':', ';', '=', '?',
@@ -76,13 +97,12 @@ def save(page_id, post_id=None):
     if post_id:
         print("Page id: ", page_id)
         print("Post id: ", post_id)
-        content = request.forms.get('content')
-        print("Content: ", content.replace('\r\n', ''))
+        content = munge_text(request.forms.get('content'))
+        print("Content: ", content)
     else:
         # it's a new blog page
         # create new entry in site db file's 'pages' table 
         # create a new table in site db file
-        
         print("Page id: ", page_id)
         title = request.forms.get('title')
         page_name = slugify(title)

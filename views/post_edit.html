@@ -68,19 +68,21 @@
 </form>
 
 % end
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.8.5/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.0.16/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector: '#editor',
-        height : 150,
+        plugins: "",
+        // height : 150,
         statusbar: true,
-        menubar: false,
+        menubar: true,
+        menubar: 'file edit view insert format tools table help',
         plugins: [
-            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'autoresize advlist lists link image charmap print preview anchor textcolor',
             'searchreplace visualblocks code fullscreen',
             'insertdatetime media table contextmenu paste code help wordcount'
         ],
-        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        toolbar: 'undo redo |  formatselect | bold italic backcolor  | bullist numlist outdent indent | removeformat | help',
         content_style: ".mce-content-body {font-size:14px;font-family:Verdana,Arial,Helvetica,sans-serif;}",
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i']

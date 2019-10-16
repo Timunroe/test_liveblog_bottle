@@ -1,14 +1,32 @@
-db operations
 
-PAGE:
+Information structure:
+
+Each site will have its own db .json file.
+Each db will have a 'pages' table, and other tables named for blogs.
+The 'pages' table will hold top-level information about the blogs:
+name, date created, total posts.
+The 'doc_id' of each blog in the 'pages' table will be the 'page_id' 
+-- primary key -- linking this table of posts to 'pages' table.
 
 
-POST:
+Page, Post templates can be the same, just looping over a list.
+So, always provide the templates with a list, even if just 1 item in list.
+
+PAGE template:
+name: text
+date created: function returns text '2019-xx-xx'
+(posts total: Might skip this for awhile)
+status: (live, draft)
+DNN asset
+script name
+
+POST template:
 subhead (optional)
 contents: required
-author: required
+type: text/twitter/youtube/instagram
+(author: required)
 status: (live, draft): default live
-rank (1,2): default 0
+rank (1,2,3): default 0
 created time: auto set on first save
 modified time: auto set on every update
 
@@ -25,3 +43,9 @@ PAGE: show list of page posts
 EDIT PAGE: 
     > show subhead, dnn asset, script name
     > action to save changes, cancel leads back to page with ID
+
++++
+
+each page will have a corresponding .json file on S3 server, 
+script will pull in this .json file, just an object with minifited HTML,
+and append it to all the divs on the page with class .pica-target.
