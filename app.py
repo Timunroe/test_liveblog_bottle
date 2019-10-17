@@ -12,7 +12,7 @@ app = Bottle()
 
 '''
 Need app to allow user to create a stream of a blog page
--- a stream of micro-posts, 
+-- a stream of micro-posts,
 either text/HTML, or Twitter/Instagram/Youtube embed ---
 and publish as a .json file to S3,
 so a javascript script linked to a DNN article will pull it in,
@@ -24,18 +24,34 @@ NEED TABLE FOR EACH 'blog/page'.
 
 def munge_text(data):
     # fixes for text imported from form
-    # Need to wrap youtube link with responsive div
+    # Need to wrap youtube link with responsive div,
+    # Need to wrap img tag with responsive figure wrapper
     # before calling micawber
     print("Raw data: ", data)
     temp = ''
     for line in data.splitlines():
-        if 'youtube' in line:
-            temp += f'''<div class="embed-container">{line}</div>'''
+        if 'youtube.com' in line:
+            temp += f'''<div class="embed-container">{line.replace('<p>', '').replace('</p>', '')}</div>'''
+        elif 'IMG:' in line:
+            img_url = line.replace('<p>IMG:', '').replace('</p>', '').strip()
+        elif 'CAP:' in line:
+            line = line.replace('<p>CAP:', '').replace('</p>', '').strip()
+            temp += f'''<figure style="margin: 0;"><img style="width: 100%;" src="{img_url}" alt="{line}"><figcaption style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;">{line}</figcaption></figure>'''
+        elif '<blockquote' in line:
+            temp += f'''{line}<span style="color: grey; float: left; font-size: 52px; line-height: 1; font-weight: bold; margin-right: 9px;">“</span><div style="margin-left: 35px;">'''
+        elif '/blockquote' in line:
+            temp += f'''</div>{line}'''
         else:
             temp += line
     '''
     <div class='embed-container'><iframe src='https://www.youtube.com/embed/QILiHiTD3uc' frameborder='0' allowfullscreen></iframe></div>
+    ---
+    <figure style="margin: 0;">
+    <img style="width: 100%;" src="xxxxxxxx" alt=".">
+    <figcaption style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;">XXXXXXXX</figcaption></figure>
+
     '''
+    # need to modify iframes with youtube
     return providers.parse_html(temp)
 
 
@@ -45,10 +61,12 @@ non_url_safe = ['"', '#', '$', '%', '&', '+',
                 '{', '|', '}', '~', "'"]
 translate_table = {ord(char): u'' for char in non_url_safe}
 
+
 def slugify(text):
     text = text.translate(translate_table)
     text = u'_'.join(text.split())
     return text
+
 
 sites = ['spectator', 'record', 'niagara', 'examiner']
 default = 'spectator'
@@ -98,15 +116,16 @@ def save(page_id, post_id=None):
         print("Page id: ", page_id)
         print("Post id: ", post_id)
         content = munge_text(request.forms.get('content'))
-        print("Content: ", content)
+        print("\nCONTENT: \n", content)
     else:
         # it's a new blog page
-        # create new entry in site db file's 'pages' table 
+        # create new entry in site db file's 'pages' table
         # create a new table in site db file
         print("Page id: ", page_id)
         title = request.forms.get('title')
         page_name = slugify(title)
         print("Title: ", slugify(page_name))
         # db.table('table_name')
+
 
 run(app, host=HOST, port=PORT, debug=True, reloader=True)

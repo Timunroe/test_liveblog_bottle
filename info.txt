@@ -12,6 +12,20 @@ The 'doc_id' of each blog in the 'pages' table will be the 'page_id'
 Page, Post templates can be the same, just looping over a list.
 So, always provide the templates with a list, even if just 1 item in list.
 
+URL STRUCTURE:
+x/site/all - show all sites, link to site pages
+-------------
+x/site/id/page/all
+x/site/id/page/new
+-------------
+x/site/id/page/id/edit
+-------------
+x/site/id/page/id/post/all
+x/site/id/page/id/post/new
+-------------
+x/site/id/page/id/post/id/edit
+
+
 PAGE template:
 name: text
 date created: function returns text '2019-xx-xx'
