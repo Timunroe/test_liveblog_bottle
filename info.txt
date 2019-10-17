@@ -13,21 +13,22 @@ Page, Post templates can be the same, just looping over a list.
 So, always provide the templates with a list, even if just 1 item in list.
 
 URL STRUCTURE:
-x/site/all - show all sites, link to site pages
+x/sites - show all sites, link to site pages
 -------------
-x/site/id/page/all
-x/site/id/page/new
+x/site/id/page/list - show all pages of a particular site
+x/site/id/page/new - add new page
+x/site/id/page/save - a method post
 -------------
 x/site/id/page/id/edit
 -------------
-x/site/id/page/id/post/all
+x/site/id/page/id/post/list
 x/site/id/page/id/post/new
 -------------
 x/site/id/page/id/post/id/edit
 
 
 PAGE template:
-name: text
+title: text
 date created: function returns text '2019-xx-xx'
 (posts total: Might skip this for awhile)
 status: (live, draft)
@@ -36,9 +37,8 @@ script name
 
 POST template:
 subhead (optional)
-contents: required
-type: text/twitter/youtube/instagram
-(author: required)
+text_contents: required
+html_contents: after processing
 status: (live, draft): default live
 rank (1,2,3): default 0
 created time: auto set on first save

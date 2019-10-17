@@ -1,15 +1,16 @@
-% rebase('base.html', title='index')
+% rebase('base.html', title='Pages')
+
 <h2 class="mb-4">
     Pages  <a class="btn btn-warning" href="/page/new">Add new</a>
 </h2>
 
 <hr>
 % for item in data:
-<p class="h5 mb-3"><small class="text-muted">Title:</small> {{item['title']}}</p>
+<p class="h5 mb-3">{{item['title']}}</p>
 <div class="btn-group mb-2" role="group" aria-label="Basic example">
-    <a class="btn btn-outline-dark btn-sm" href="/page/{{item['page_id']}}">Posts</a>
-    <a class="btn btn-outline-dark btn-sm" href="/page/{{item['page_id']}}/preview">Preview</a>
-    <a class="btn btn-dark btn-sm" href="/edit/page/{{item['page_id']}}">Edit</a>
+    <a class="btn btn-outline-dark btn-sm" href="{{item.doc_id}}/list">Posts</a>
+    <a class="btn btn-outline-dark btn-sm" href="{{item.doc_id}}/preview">Preview</a>
+    <a class="btn btn-dark btn-sm" href="/edit/page/{{item.doc_id}}">Edit</a>
 </div>
 <hr>
 % end

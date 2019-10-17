@@ -21,6 +21,8 @@ parse and add the HTML to certain divs.
 NEED TABLE FOR EACH 'blog/page'.
 '''
 
+# TEXT PROCESSING FUNCTIONS
+
 
 def munge_text(data):
     # fixes for text imported from form
@@ -68,12 +70,29 @@ def slugify(text):
     return text
 
 
+# DATABASE FUNCIONS
+
+
+def get_pages(site):
+    db = TinyDB(f'''blogs/{site}.json''')
+    return db.table('pages').all()
+
+
+def get_posts(site, page):
+    db = TinyDB(f'''blogs/{site}.json''')
+    Posts = Query()
+    db.table('posts').all
+    return db.table('pages').search(Posts.page_id == page)
+
+
 sites = ['spectator', 'record', 'niagara', 'examiner']
 default = 'spectator'
 for site in sites:
     TinyDB(f'''./blogs/{site}.json''')
 
 # db = TinyDB(f'''./blogs/{default}.json''')
+
+# ROUTING FUNCIONS
 
 
 @app.route('/static/<filename>')
@@ -83,22 +102,45 @@ def server_static(filename):
 
 @app.route('/')
 def index():
+    return template('sites.html')
     # get list of pages
-    return template('pages.html', data=db.get_pages())
+    # return template('pages.html', data=db.get_pages())
 
 
-@app.route('/page/<page_id>')
-def posts(page_id):
+@app.route('/site/<site_id>/page/<action>')
+def posts(site_id, action):
+    # /site/side_id/page/all - show all pages of a particular site
+    # /site/site_id/page/new - add new page
+    # /site/site_id/page/save - save page details
+    if action == 'list':
+        return template('pages.html', data=get_pages(site_id))
+    if action == 'new':
+        return template('page_edit.html', data=None)
+    '''
     # if id is 'new', then create page
     if page_id == 'new':
         return template('page_edit.html', data=None)
     # else get list of posts for this page
     else:
         return template('page.html', data=db.get_posts(page_id))
+    '''
 
 
-@app.route('/edit/page/<page_id>')
-@app.route('/edit/page/<page_id>/post/<post_id>')
+@app.route('/site/<site_id>/page/<page_id>/<action>')
+def posts(site_id, page_id, action):
+    # if id is 'new', then create page
+    if action == 'list':
+
+        return template('page.html', data=get_posts(site_id, page_id), )
+
+    # if page_id == 'new':
+        # return template('page_edit.html', data=None)
+    # else get list of posts for this page
+    else:
+        return template('page.html', data=db.get_posts(page_id))
+
+
+@app.route('/edit/page/<site_id>/page/<page_id>')
 def edit(page_id, post_id=None):
     # dealing with editing a new page or existing page
     if post_id is None:
