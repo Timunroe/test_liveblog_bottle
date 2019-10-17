@@ -1,9 +1,17 @@
-% rebase('base.html', title='page', page_id=data['page_id'])
+% rebase('base.html', title='Posts')
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Sites</a></li>
+        <li class="breadcrumb-item">Spectator</li>
+        <li class="breadcrumb-item"><a href="/site/{{site}}/page/list">Pages</a></li>
+    </ol>
+</nav>
 
 <h2 class="mb-4">
-    Posts  <a class="btn btn-warning" href="/edit/page/{{data['page_id']}}/post/new">Add new</a>
+    Posts  <a class="btn btn-warning" href="new">Add new</a>
 </h2>
-<p class="panel-heading">Page: <b>{{data['title']}}</b>
+<p class="panel-heading">Page: <b>{{page}}</b>
 
 % for item in data:
 <div class="card">
@@ -13,20 +21,10 @@
         </header>
     % end
     <div class="card-body">
-        <div class="media">
-                <figure class="">
-                    <img class="rounded-circle mr-2" style="width: 40px;" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                </figure>
-            <div class="media-body">
-                <p class="title mb-0">{{item['author']}}</p>
-                <!-- <p class="subtitle is-6">@johnsmith</p> -->
-                <time style="font-size: 12px;" datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>
-        </div>
         <div class="content">
-           {{!item['content']}}
+           {{!item['processed']}}
         </div>
-        <a class="btn btn-dark btn-sm" href="/edit/page/{{data['page_id']}}/post/{{item['post_id']}}" role="button">Edit</a>
+        <a class="btn btn-dark btn-sm" href="edit" role="button">Edit</a>
     </div>
 </div>
 <div style="height: 20px;"></div>

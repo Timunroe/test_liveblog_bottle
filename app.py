@@ -81,8 +81,13 @@ def get_pages(site):
 def get_posts(site, page):
     db = TinyDB(f'''blogs/{site}.json''')
     Posts = Query()
-    db.table('posts').all
-    return db.table('pages').search(Posts.page_id == page)
+    return db.table('posts').search(Posts.page_id == page)
+
+
+def get_page_name(site, page):
+    db = TinyDB(f'''blogs/{site}.json''')
+    page = db.table('pages').get(doc_id=int(page))
+    return page['title']
 
 
 sites = ['spectator', 'record', 'niagara', 'examiner']
@@ -130,8 +135,8 @@ def posts(site_id, action):
 def posts(site_id, page_id, action):
     # if id is 'new', then create page
     if action == 'list':
-
-        return template('page.html', data=get_posts(site_id, page_id), )
+        page_name = get_page_name(site_id, page_id)
+        return template('page.html', data=get_posts(site_id, page_id), page=page_name, site=site_id)
 
     # if page_id == 'new':
         # return template('page_edit.html', data=None)
